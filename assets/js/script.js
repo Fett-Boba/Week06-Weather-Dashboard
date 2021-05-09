@@ -111,7 +111,7 @@ function updateCurrentWeather(d) {
      h2.textContent = d.name + " " + moment.unix(d.dt).format("MM/DD/YYYY");
 
      var img = document.getElementById("curdayIcon");
-     img.setAttribute("src", "http://openweathermap.org/img/wn/" + d.weather[0].icon + ".png");
+     img.setAttribute("src", "https://openweathermap.org/img/wn/" + d.weather[0].icon + ".png");
 
      var spanTemp = document.getElementById('curdayTemp');
      spanTemp.textContent = d.main.temp + " F";
@@ -145,7 +145,7 @@ function populateForecastContainer(d, dt, fDay, i) {
      h3.textContent = dt[0];
 
      var img = document.getElementById("day" + fDay + "Icon");
-     img.setAttribute("src", "http://openweathermap.org/img/wn/" + d.list[i].weather[0].icon + ".png");
+     img.setAttribute("src", "https://openweathermap.org/img/wn/" + d.list[i].weather[0].icon + ".png");
 
      var spanTemp = document.getElementById("day" + fDay + "Temp");
      spanTemp.textContent = d.list[i].main.temp;
