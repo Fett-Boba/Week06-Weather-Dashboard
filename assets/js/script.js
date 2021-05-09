@@ -1,7 +1,7 @@
 var historyContainer = document.querySelector('#historyContainer');
 var pastSearches = [];
 
-
+// Button handler: Search button
 function btnSearchHandler(event) {
      var city = getCity();
      fetchData(buildCurdayUrl(city), "currentWeather");
@@ -9,22 +9,26 @@ function btnSearchHandler(event) {
      setHistory(city);
 }
 
+// Button handler: Previous searches
 function citySearchHandler(event) {
      var city = event.target.getAttribute('data-city');
      fetchData(buildCurdayUrl(city), "currentWeather");
      fetchData(buildFivedayUrl(city), "fivedayForecast");
 }
 
+// Get search city from user
 function getCity() {
      return document.getElementById("inpCity").value;
 }
 
+// Get past searches from local storage
 function getHistory() {
      if (localStorage["pastSearches"]) {
           pastSearches = JSON.parse(localStorage["pastSearches"]);
      }
 }
 
+// Store last search in local storage
 function setHistory(search) {
      if(pastSearches.indexOf(search) == -1) {
           pastSearches.unshift(search);
@@ -35,16 +39,23 @@ function setHistory(search) {
      }
 }
 
+// Display previous search buttons
 function displayHistory() {
      var historyContainer = document.getElementById("historyContainer");
      historyContainer.innerHTML = "";
      for (var i = 0; i < pastSearches.length; i++) {
+        
           var btn = document.createElement("button");
           var p = document.createElement("p");
+        
           btn.textContent = pastSearches[i];
           btn.setAttribute("data-city", pastSearches[i]);
+          btn.setAttribute("type","button");
+          btn.setAttribute("class","btn btn-primary");
+        
           historyContainer.appendChild(p);
           historyContainer.appendChild(btn);
+        
           if (i === 0) {
                fetchData(buildCurdayUrl(pastSearches[i]), "currentWeather");
                fetchData(buildFivedayUrl(pastSearches[i]), "fivedayForecast");
@@ -52,6 +63,7 @@ function displayHistory() {
      }
 }
 
+// Buld URLs for API
 function buildCurdayUrl(city) {
      return "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=689e7816efbb0d3a154fea46ac09c553";
 }
@@ -61,6 +73,8 @@ function buildFivedayUrl(city) {
 function buildUVUrl(lat, lon) {
      return "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=minutely,hourly,daily,alerts&appid=689e7816efbb0d3a154fea46ac09c553";
 }
+
+// Fetch the data from the APIs
 function fetchData(requestUrl, requestType) {
      fetch(requestUrl)
           .then(function (response) { return response.json() })
@@ -75,11 +89,22 @@ function fetchData(requestUrl, requestType) {
           })
 }
 
+// Display the UV index, with red, blue, green background to indicate severity
 function getUVIndex(d) {
+     
      var spanUV = document.getElementById('curdayUV');
      spanUV.textContent = d.current.uvi;
+
+     if (d.current.uvi >= 0 && d.current.uvi < 3 ) {
+          spanUV.setAttribute("class","p-3 mb-2 bg-success text-white")
+     } else if (d.current.uvi >= 3 && d.current.uvi < 6) {
+          spanUV.setAttribute("class", "p-3 mb-2 bg-info text-white");
+     } else {
+          spanUV.setAttribute("class", "p-3 mb-2 bg-danger text-white");
+     }
 }
 
+// Populate the current weather container
 function updateCurrentWeather(d) {
 
      var h2 = document.getElementById('city');     
@@ -99,18 +124,21 @@ function updateCurrentWeather(d) {
 
      fetchData(buildUVUrl(d.coord.lat, d.coord.lon), "uvIndex");
 }
+
+// Collect data and populate the five day forecast containers
 function updateFivedayForecast(d) {
      var date;
      var forecastDay = 1;
      for (i = 0; i < 40; i++) {
           date = d.list[i].dt_txt.split(" ", 2)
-          if (i === 0 || (date[1] === "00:00:00" && forecastDay <= 5 )) {
+          if (date[1] === "00:00:00" && forecastDay <= 5 ) {
                populateForecastContainer(d, date, forecastDay, i);
                forecastDay++;
           }
      }
 }
 
+// Display the five day forecast
 function populateForecastContainer(d, dt, fDay, i) {
 
      var h3 = document.getElementById("day" + fDay + "Date");
@@ -129,7 +157,7 @@ function populateForecastContainer(d, dt, fDay, i) {
      spanHumidity.textContent = d.list[i].main.humidity + " %";
 }
 
-// Main: Display last search on the way into the website
+// Main: Display last search on the way into the website as default
 getHistory();
 displayHistory();
 
