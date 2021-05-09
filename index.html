@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Weather Dashboard</title>
+     <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+
+<body>
+
+     <div class=btnContainer>
+          <h2>Search for a City</h2>
+          <input type="text" id="inpCity" />
+          <p>
+               <button id="btnSearch">Search</button>
+          </p>
+          
+          <hr>
+
+          <div id="historyContainer">
+
+          </div>
+     </div>
+
+
+     <div class="curdayContainer">
+          <h2 id="city"></h2>
+          <p><img src="" id="curdayIcon"></p>
+          <p>Temp: <span id="curdayTemp"></span></p>
+          <p>Wind: <span id="curdayWind"></span></p>
+          <p>Humidity: <span id="curdayHumidity"></span></p>
+          <p>UV Index: <span id="curdayUV"></span></p> 
+     </div>
+
+     <div>
+          <h2>Five Day Forecast:</h2>
+
+          <div class="day1Container"> 
+               <h3 id="day1Date"></h3>
+               <img src="" id="day1Icon">
+               <p>Temp: <span id="day1Temp"></span></p>
+               <p>Wind: <span id="day1Wind"></span></p>
+               <p>Humidity: <span id="day1Humidity"></span></p>          
+          </div>
+
+          <div class="day2Container"> 
+               <h3 id="day2Date"></h3>
+               <img src="" id="day2Icon">
+               <p>Temp: <span id="day2Temp"></span></p>
+               <p>Wind: <span id="day2Wind"></span></p>
+               <p>Humidity: <span id="day2Humidity"></span></p>          
+          </div>
+
+          <div class="day3Container"> 
+               <h3 id="day3Date"></h3>
+               <img src="" id="day3Icon">
+               <p>Temp: <span id="day3Temp"></span></p>
+               <p>Wind: <span id="day3Wind"></span></p>
+               <p>Humidity: <span id="day3Humidity"></span></p>          
+          </div>
+
+          <div class="day4Container"> 
+               <h3 id="day4Date"></h3>
+               <img src="" id="day4Icon">
+               <p>Temp: <span id="day4Temp"></span></p>
+               <p>Wind: <span id="day4Wind"></span></p>
+               <p>Humidity: <span id="day4Humidity"></span></p>          
+          </div>
+
+          <div class="day5Container"> 
+               <h3 id="day5Date"></h3>
+               <img src="" id="day5Icon">
+               <p>Temp: <span id="day5Temp"></span></p>
+               <p>Wind: <span id="day5Wind"></span></p>
+               <p>Humidity: <span id="day5Humidity"></span></p>          
+          </div>
+
+
+     </div>
+
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+     <script src="assets/js/script.js"></script>
+</body>
+
+</html>
