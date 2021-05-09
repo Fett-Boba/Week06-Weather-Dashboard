@@ -65,10 +65,10 @@ function displayHistory() {
 
 // Buld URLs for API
 function buildCurdayUrl(city) {
-     return "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=689e7816efbb0d3a154fea46ac09c553";
+     return "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=689e7816efbb0d3a154fea46ac09c553";
 }
 function buildFivedayUrl(city) {
-     return "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial&appid=689e7816efbb0d3a154fea46ac09c553";
+     return "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial&appid=689e7816efbb0d3a154fea46ac09c553";
 }
 function buildUVUrl(lat, lon) {
      return "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=minutely,hourly,daily,alerts&appid=689e7816efbb0d3a154fea46ac09c553";
